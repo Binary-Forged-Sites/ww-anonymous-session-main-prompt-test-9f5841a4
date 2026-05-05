@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSVP — Main prompt: test</title>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #faf7f2;
+      color: #2a2a2a;
+      font-family: Georgia, "Times New Roman", serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page-shell { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .page-back { display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 2rem; color: #b08d57; text-decoration: none; font-size: 0.9rem; letter-spacing: 0.04em; }
+    .page-back:hover { text-decoration: underline; }
+    .page-eyebrow { text-align: center; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; opacity: 0.7; margin: 0 0 0.5rem; }
+    .page-title { text-align: center; font-size: clamp(2rem, 5vw, 2.75rem); margin: 0 0 2.5rem; font-weight: 500; letter-spacing: 0.02em; }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <a class="page-back" href="/">← Back to invitation</a>
+    <p class="page-eyebrow">Main prompt: test</p>
+    <h1 class="page-title">Please respond</h1>
+    <section id="wewed-rsvp-form" class="wewed-rsvp" aria-labelledby="wewed-rsvp-heading">
+  <style>
+    .wewed-rsvp { padding: 4rem 1.5rem; max-width: 640px; margin: 0 auto; font-family: Georgia, 'Times New Roman', serif; color: #2a2a2a; }
+    .wewed-rsvp__heading { text-align: center; font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 0.5rem; letter-spacing: 0.04em; }
+    .wewed-rsvp__deadline { text-align: center; opacity: 0.75; margin: 0 0 2.5rem; font-style: italic; }
+    .wewed-rsvp__field { margin-bottom: 1.5rem; }
+    .wewed-rsvp__label { display: block; margin-bottom: 0.4rem; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.02em; }
+    .wewed-rsvp__hint { font-size: 0.85rem; opacity: 0.7; margin: 0.25rem 0 0; }
+    .wewed-rsvp__input,
+    .wewed-rsvp__textarea {
+      width: 100%; box-sizing: border-box; padding: 0.85rem 1rem; font-size: 1rem;
+      font-family: inherit; color: inherit; background: rgba(255,255,255,0.6);
+      border: 1px solid rgba(0,0,0,0.18); border-radius: 4px; outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .wewed-rsvp__input:focus,
+    .wewed-rsvp__textarea:focus { border-color: #b08d57; box-shadow: 0 0 0 3px rgba(176,141,87,0.15); }
+    .wewed-rsvp__textarea { min-height: 90px; resize: vertical; }
+    .wewed-rsvp__radio-group { display: flex; gap: 1rem; }
+    .wewed-rsvp__radio { flex: 1; border: 1px solid rgba(0,0,0,0.18); border-radius: 4px; padding: 0.85rem 1rem; cursor: pointer; text-align: center; transition: all 0.15s ease; }
+    .wewed-rsvp__radio:hover { border-color: #b08d57; }
+    .wewed-rsvp__radio input { margin-right: 0.4rem; }
+    .wewed-rsvp__radio--selected { background: #b08d57; color: #fff; border-color: #b08d57; }
+    .wewed-rsvp__check { display: flex; align-items: flex-start; gap: 0.6rem; cursor: pointer; user-select: none; }
+    .wewed-rsvp__check input { margin-top: 0.25rem; }
+    .wewed-rsvp__hidden { display: none; }
+    .wewed-rsvp__suggestions {
+      position: relative; background: #fff; border: 1px solid rgba(0,0,0,0.12);
+      border-top: none; border-radius: 0 0 4px 4px; max-height: 240px; overflow-y: auto;
+      margin-top: -1px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+    .wewed-rsvp__suggestion { padding: 0.7rem 1rem; cursor: pointer; }
+    .wewed-rsvp__suggestion:hover, .wewed-rsvp__suggestion[aria-selected="true"] { background: rgba(176,141,87,0.12); }
+    .wewed-rsvp__suggestion-meta { font-size: 0.8rem; opacity: 0.6; margin-top: 0.15rem; }
+    .wewed-rsvp__plus-one { padding: 1rem 1.25rem; margin-top: 0.75rem; border-left: 3px solid #b08d57; background: rgba(176,141,87,0.05); border-radius: 0 4px 4px 0; }
+    .wewed-rsvp__submit { display: block; width: 100%; padding: 1rem; font-size: 1rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; background: #b08d57; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background 0.15s ease; }
+    .wewed-rsvp__submit:hover:not(:disabled) { background: #8e7042; }
+    .wewed-rsvp__submit:disabled { opacity: 0.6; cursor: wait; }
+    .wewed-rsvp__notice { padding: 1.5rem; border-radius: 4px; text-align: center; }
+    .wewed-rsvp__notice--success { background: rgba(124,160,116,0.1); color: #2d5d2a; border: 1px solid rgba(124,160,116,0.3); }
+    .wewed-rsvp__notice--error { background: rgba(187,89,89,0.1); color: #7d2828; border: 1px solid rgba(187,89,89,0.3); margin-bottom: 1rem; }
+    .wewed-rsvp__skip { display: block; text-align: center; margin-top: 0.5rem; font-size: 0.85rem; color: #b08d57; cursor: pointer; background: none; border: none; }
+  </style>
+  <h2 id="wewed-rsvp-heading" class="wewed-rsvp__heading">RSVP</h2>
+  
+  <form id="wewed-rsvp-form-el" novalidate>
+    <div id="wewed-rsvp-error" class="wewed-rsvp__notice wewed-rsvp__notice--error wewed-rsvp__hidden" role="alert"></div>
+
+    <div class="wewed-rsvp__field" id="wewed-rsvp-name-step">
+      <label class="wewed-rsvp__label" for="wewed-rsvp-name">Find your name</label>
+      <input class="wewed-rsvp__input" type="text" id="wewed-rsvp-name" autocomplete="off" placeholder="Start typing…" required />
+      <div id="wewed-rsvp-suggestions" class="wewed-rsvp__suggestions wewed-rsvp__hidden" role="listbox"></div>
+      <button type="button" id="wewed-rsvp-skip-match" class="wewed-rsvp__skip wewed-rsvp__hidden">Don't see your name? Continue without selecting →</button>
+    </div>
+
+    <div id="wewed-rsvp-rest" class="wewed-rsvp__hidden">
+      <div class="wewed-rsvp__field">
+        <span class="wewed-rsvp__label">Will you be attending?</span>
+        <div class="wewed-rsvp__radio-group">
+          <label class="wewed-rsvp__radio"><input type="radio" name="attending" value="yes" required /> Joyfully accept</label>
+          <label class="wewed-rsvp__radio"><input type="radio" name="attending" value="no" required /> Regretfully decline</label>
+        </div>
+      </div>
+
+      <div class="wewed-rsvp__field">
+        <label class="wewed-rsvp__check">
+          <input type="checkbox" id="wewed-rsvp-dietary" />
+          <span>I have allergies or dietary requirements</span>
+        </label>
+        <div id="wewed-rsvp-dietary-detail" class="wewed-rsvp__hidden" style="margin-top:0.6rem;">
+          <textarea class="wewed-rsvp__textarea" id="wewed-rsvp-dietary-text" placeholder="e.g. Nut allergy, vegetarian, gluten-free…"></textarea>
+        </div>
+      </div>
+
+      <div class="wewed-rsvp__field wewed-rsvp__hidden" id="wewed-rsvp-plus-one-wrap">
+        <label class="wewed-rsvp__check">
+          <input type="checkbox" id="wewed-rsvp-bringing-plus-one" />
+          <span>I'm bringing a plus one</span>
+        </label>
+        <div id="wewed-rsvp-plus-one-detail" class="wewed-rsvp__plus-one wewed-rsvp__hidden">
+          <div class="wewed-rsvp__field" style="margin-bottom:1rem;">
+            <label class="wewed-rsvp__label" for="wewed-rsvp-plus-one-name">Their name</label>
+            <input class="wewed-rsvp__input" type="text" id="wewed-rsvp-plus-one-name" />
+          </div>
+          <label class="wewed-rsvp__check">
+            <input type="checkbox" id="wewed-rsvp-plus-one-dietary" />
+            <span>They have allergies or dietary requirements</span>
+          </label>
+          <div id="wewed-rsvp-plus-one-dietary-detail" class="wewed-rsvp__hidden" style="margin-top:0.6rem;">
+            <textarea class="wewed-rsvp__textarea" id="wewed-rsvp-plus-one-dietary-text" placeholder="Their dietary requirements…"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="wewed-rsvp__field">
+        <label class="wewed-rsvp__label" for="wewed-rsvp-message">A note for the couple <span style="opacity:0.6; font-weight:400;">(optional)</span></label>
+        <textarea class="wewed-rsvp__textarea" id="wewed-rsvp-message" maxlength="2000"></textarea>
+      </div>
+
+      <button type="submit" class="wewed-rsvp__submit" id="wewed-rsvp-submit">Send RSVP</button>
+    </div>
+  </form>
+
+  <div id="wewed-rsvp-thanks" class="wewed-rsvp__notice wewed-rsvp__notice--success wewed-rsvp__hidden">
+    <h3 style="margin:0 0 0.5rem;">Thank you!</h3>
+    <p style="margin:0;">Your RSVP has been received. We can't wait to celebrate with you.</p>
+  </div>
+</section>
+
+<script>
+(function() {
+  var apiBase = "http://localhost:5102/api/v1/public/projects/wedding-invitation-9f5841a4";
+  var nameInput = document.getElementById("wewed-rsvp-name");
+  var suggestionsEl = document.getElementById("wewed-rsvp-suggestions");
+  var skipBtn = document.getElementById("wewed-rsvp-skip-match");
+  var restEl = document.getElementById("wewed-rsvp-rest");
+  var plusOneWrap = document.getElementById("wewed-rsvp-plus-one-wrap");
+  var plusOneCheck = document.getElementById("wewed-rsvp-bringing-plus-one");
+  var plusOneDetail = document.getElementById("wewed-rsvp-plus-one-detail");
+  var plusOneNameInput = document.getElementById("wewed-rsvp-plus-one-name");
+  var plusOneDietary = document.getElementById("wewed-rsvp-plus-one-dietary");
+  var plusOneDietaryDetail = document.getElementById("wewed-rsvp-plus-one-dietary-detail");
+  var dietaryCheck = document.getElementById("wewed-rsvp-dietary");
+  var dietaryDetail = document.getElementById("wewed-rsvp-dietary-detail");
+  var form = document.getElementById("wewed-rsvp-form-el");
+  var thanks = document.getElementById("wewed-rsvp-thanks");
+  var errorBox = document.getElementById("wewed-rsvp-error");
+  var submitBtn = document.getElementById("wewed-rsvp-submit");
+
+  var matchedGuest = null;
+  var searchTimer = null;
+
+  function show(el) { el.classList.remove("wewed-rsvp__hidden"); }
+  function hide(el) { el.classList.add("wewed-rsvp__hidden"); }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    show(errorBox);
+  }
+
+  function clearError() { hide(errorBox); }
+
+  function renderSuggestions(matches, query) {
+    suggestionsEl.innerHTML = "";
+    if (!matches || matches.length === 0) {
+      hide(suggestionsEl);
+      if (query && query.length >= 2) show(skipBtn);
+      return;
+    }
+    hide(skipBtn);
+    matches.forEach(function(m) {
+      var div = document.createElement("div");
+      div.className = "wewed-rsvp__suggestion";
+      div.setAttribute("role", "option");
+      div.textContent = m.name;
+      if (m.hasExistingResponse) {
+        var meta = document.createElement("div");
+        meta.className = "wewed-rsvp__suggestion-meta";
+        meta.textContent = "You've already responded — this will update your RSVP";
+        div.appendChild(meta);
+      }
+      div.addEventListener("click", function() { selectGuest(m); });
+      suggestionsEl.appendChild(div);
+    });
+    show(suggestionsEl);
+  }
+
+  function selectGuest(g) {
+    matchedGuest = g;
+    nameInput.value = g.name;
+    hide(suggestionsEl);
+    hide(skipBtn);
+    if (g.plusOneAllowed) {
+      show(plusOneWrap);
+      if (g.plusOneNamed) plusOneNameInput.value = g.plusOneNamed;
+    } else {
+      hide(plusOneWrap);
+      plusOneCheck.checked = false;
+      hide(plusOneDetail);
+    }
+    show(restEl);
+  }
+
+  function selectUninvited() {
+    matchedGuest = null;
+    hide(suggestionsEl);
+    hide(skipBtn);
+    hide(plusOneWrap);
+    plusOneCheck.checked = false;
+    hide(plusOneDetail);
+    show(restEl);
+  }
+
+  nameInput.addEventListener("input", function() {
+    matchedGuest = null;
+    hide(restEl);
+    var q = nameInput.value.trim();
+    clearError();
+    if (q.length < 2) {
+      hide(suggestionsEl);
+      hide(skipBtn);
+      return;
+    }
+    if (searchTimer) clearTimeout(searchTimer);
+    searchTimer = setTimeout(function() {
+      fetch(apiBase + "/guest-search?q=" + encodeURIComponent(q), { credentials: "omit" })
+        .then(function(r) { return r.ok ? r.json() : { matches: [] }; })
+        .then(function(d) { renderSuggestions(d.matches || [], q); })
+        .catch(function() { renderSuggestions([], q); });
+    }, 250);
+  });
+
+  skipBtn.addEventListener("click", selectUninvited);
+
+  dietaryCheck.addEventListener("change", function() {
+    if (dietaryCheck.checked) show(dietaryDetail); else hide(dietaryDetail);
+  });
+
+  plusOneCheck.addEventListener("change", function() {
+    if (plusOneCheck.checked) show(plusOneDetail); else hide(plusOneDetail);
+  });
+
+  plusOneDietary.addEventListener("change", function() {
+    if (plusOneDietary.checked) show(plusOneDietaryDetail); else hide(plusOneDietaryDetail);
+  });
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    clearError();
+
+    var attending = (form.querySelector("input[name=attending]:checked") || {}).value;
+    if (!attending) {
+      showError("Please let us know if you can attend.");
+      return;
+    }
+
+    var bringingPlusOne = !!(matchedGuest && matchedGuest.plusOneAllowed && plusOneCheck.checked);
+    var payload = {
+      matchedGuestId: matchedGuest ? matchedGuest.id : null,
+      guestName: nameInput.value.trim(),
+      attending: attending === "yes",
+      hasDietaryRequirements: dietaryCheck.checked,
+      dietaryDetails: dietaryCheck.checked ? document.getElementById("wewed-rsvp-dietary-text").value.trim() : null,
+      bringingPlusOne: bringingPlusOne,
+      plusOneName: bringingPlusOne ? plusOneNameInput.value.trim() : null,
+      plusOneHasDietaryRequirements: bringingPlusOne && plusOneDietary.checked,
+      plusOneDietaryDetails: bringingPlusOne && plusOneDietary.checked ? document.getElementById("wewed-rsvp-plus-one-dietary-text").value.trim() : null,
+      message: document.getElementById("wewed-rsvp-message").value.trim() || null
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+    fetch(apiBase + "/rsvp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      credentials: "omit"
+    }).then(function(r) {
+      return r.json().then(function(body) {
+        if (!r.ok) throw new Error((body && body.error && body.error.message) || "Submission failed");
+        hide(form);
+        show(thanks);
+        thanks.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    }).catch(function(err) {
+      showError(err.message || "Something went wrong. Please try again.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Send RSVP";
+    });
+  });
+})();
+</script>
+  </main>
+</body>
+</html>
